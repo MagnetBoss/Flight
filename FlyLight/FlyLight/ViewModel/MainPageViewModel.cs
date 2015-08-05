@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Input;
-using FlyLight.Model.TicketsSearch;
 using FlyLight.Model.TicketsSearch.Interfaces;
 using GalaSoft.MvvmLight.Command;
 using ReactiveUI;

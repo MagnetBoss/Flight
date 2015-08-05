@@ -1,4 +1,5 @@
-﻿using FlyLight.Model.TicketsSearch.DesignMode;
+﻿using FlyLight.BL.ProposalsList.Implementation.DesignMode;
+using FlyLight.BL.ProposalsList.Interfaces;
 using FlyLight.Model.TicketsSearch.Implementation.Stub;
 using FlyLight.Model.TicketsSearch.Interfaces;
 using GalaSoft.MvvmLight;
@@ -15,16 +16,19 @@ namespace FlyLight.ViewModel
 
             if (ViewModelBase.IsInDesignModeStatic)
             {
-                SimpleIoc.Default.Register<ITicketsSearchService, TicketSearchServiceDesign>();
+                //SimpleIoc.Default.Register<ITicketsSearchService, TicketSearchServiceDesign>();
                 SimpleIoc.Default.Register<IPlacesAutoCompleteService, FakePlacesAutoCompleteService>();
+                SimpleIoc.Default.Register<IProposalsListService, FakeProposalsListService>();
             }
             else
             {
-                SimpleIoc.Default.Register<ITicketsSearchService, TicketSearchServiceDesign>();
+                //SimpleIoc.Default.Register<ITicketsSearchService, TicketSearchServiceDesign>();
                 SimpleIoc.Default.Register<IPlacesAutoCompleteService, FakePlacesAutoCompleteService>();
+                SimpleIoc.Default.Register<IProposalsListService, FakeProposalsListService>();
             }
 
             SimpleIoc.Default.Register<MainPageViewModel>();
+            SimpleIoc.Default.Register<ProposalsListViewModel>();
         }
 
         public MainPageViewModel Main
@@ -32,6 +36,14 @@ namespace FlyLight.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<MainPageViewModel>();
+            }
+        }
+
+        public ProposalsListViewModel ProposalsList
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ProposalsListViewModel>();
             }
         }
     }
