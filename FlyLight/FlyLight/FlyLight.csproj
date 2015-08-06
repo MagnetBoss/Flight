@@ -63,6 +63,7 @@
     <Compile Include="ViewModel\Messaging\ShowProposalsListMessage.cs" />
     <Compile Include="ViewModel\ProposalsListViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\MainNavigationPage.cs" />
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

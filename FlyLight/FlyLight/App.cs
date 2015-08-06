@@ -14,7 +14,7 @@ namespace FlyLight
 
         public Page GetMainPage()
         {
-            return new MainPage();
+            return new MainNavigationPage(new MainPage());
         }
 
         private readonly ViewModelLocator _locator;
