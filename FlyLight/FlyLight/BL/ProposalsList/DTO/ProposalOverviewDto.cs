@@ -6,8 +6,9 @@ namespace FlyLight.BL.ProposalsList.DTO
     public class ProposalOverviewDto
     {
         //В каждом сегменте перелета - инфа о перелете из одного аэропорта в другой
-        public IList<SegmentOverviewDto> Segments { get; set; }
-        
+        public SegmentOverviewDto ForwardTicketSegment { get; set; } //Перелет "ТУДА" 
+        public SegmentOverviewDto ReturnTicketSegment { get; set; } //Перелет "ОБРАТНО"
+         
         public decimal Price { get; set; }
         
         //Валюта, в которой указана цена

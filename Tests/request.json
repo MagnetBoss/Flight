@@ -1,0 +1,24 @@
+﻿{
+    "trip_class": "Y",
+    "user_ip": "127.0.0.1",
+    "host": "beta.aviasales.ru",
+    "locale": "ru",
+    "marker": "78042",
+    "segments": [
+        {
+            "origin": "MOW",
+            "destination": "LED",
+            "date": "2014-12-18"
+        },
+        {
+            "origin": "LED",
+            "destination": "MOW",
+            "date": "2014-12-25"
+        }
+    ],
+	    "passengers": {
+        "adults": "1",
+        "children": "0",
+        "infants": "0"
+    }
+}

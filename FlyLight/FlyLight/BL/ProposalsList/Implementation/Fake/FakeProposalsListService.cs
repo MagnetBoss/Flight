@@ -18,9 +18,7 @@ namespace FlyLight.BL.ProposalsList.Implementation.DesignMode
                     Price = new decimal(4092.12),
                     TicketSignId = "1",
                     ValidatingCarrierIconUrl = "http://pics.avs.io/120/40/SU.png",
-                    Segments = new List<SegmentOverviewDto>
-                    {
-                        //Туда
+                    ForwardTicketSegment =
                         new SegmentOverviewDto
                         {
                             DepartureAirport = "VKO",
@@ -28,6 +26,7 @@ namespace FlyLight.BL.ProposalsList.Implementation.DesignMode
                             LocalDepatureTime = DateTime.Now,
                             LocalArrivalTime = DateTime.Now.AddHours(1.5)
                         },
+                    ReturnTicketSegment =
                         //Обратно через 2 дня
                         new SegmentOverviewDto
                         {
@@ -36,7 +35,30 @@ namespace FlyLight.BL.ProposalsList.Implementation.DesignMode
                             LocalDepatureTime = DateTime.Now.AddDays(2),
                             LocalArrivalTime = DateTime.Now.AddDays(2).AddHours(1.5)
                         }
-                    }
+                },
+                new ProposalOverviewDto
+                {
+                    Currency = "RUB",
+                    Price = new decimal(4092.12),
+                    TicketSignId = "1",
+                    ValidatingCarrierIconUrl = "http://pics.avs.io/120/40/SU.png",
+                    ForwardTicketSegment =
+                        new SegmentOverviewDto
+                        {
+                            DepartureAirport = "VKO",
+                            ArrivalAirport = "LED",
+                            LocalDepatureTime = DateTime.Now,
+                            LocalArrivalTime = DateTime.Now.AddHours(1.5)
+                        },
+                    ReturnTicketSegment =
+                        //Обратно через 2 дня
+                        new SegmentOverviewDto
+                        {
+                            DepartureAirport = "LED",
+                            ArrivalAirport = "SWO",
+                            LocalDepatureTime = DateTime.Now.AddDays(2),
+                            LocalArrivalTime = DateTime.Now.AddDays(2).AddHours(1.5)
+                        }
                 }
             };
         }

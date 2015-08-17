@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows.Input;
 using FlyLight.Model.TicketsSearch.Interfaces;
+using FlyLight.ViewModel.Messaging;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using ReactiveUI;
 
 namespace FlyLight.ViewModel
@@ -73,7 +75,7 @@ namespace FlyLight.ViewModel
             {
                 return new RelayCommand(() =>
                 {
-
+                    Messenger.Default.Send(new ShowProposalsListMessage());
                 });
             }
         }

@@ -7,15 +7,38 @@
       <DataTemplate x:Key="ProposalsListTemplate">
         <ViewCell>
           <ViewCell.View>
-            <StackLayout Orientation="Vertical">
-              <Label FontSize="20" Text="{Binding Price}" />
-            </StackLayout>
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="5"/>
+              </Grid.RowDefinitions>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+              </Grid.ColumnDefinitions>
+              <Label Text="{Binding Price}" HorizontalOptions="Start" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+              <Image Source="{Binding ValidatingCarrierIconUrl}" HorizontalOptions="EndAndExpand" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"/>
+              <Label Text="{Binding ForwardTicketSegment.LocalDepatureTime, StringFormat='{0:dd MMM hh:mm}'}" Grid.Row="1" Grid.Column="0"/>
+              <Label Text="{Binding ForwardTicketSegment.DepartureAirport}" Grid.Row="1" Grid.Column="1"/>
+              <Label Text="{Binding ForwardTicketSegment.LocalArrivalTime, StringFormat='{0:hh:mm}'}" Grid.Row="1" Grid.Column="2"/>
+              <Label Text="{Binding ForwardTicketSegment.ArrivalAirport}" Grid.Row="1" Grid.Column="3"/>
+              <Label Text="{Binding ReturnTicketSegment.LocalDepatureTime, StringFormat='{0:dd MMM hh:mm}'}" Grid.Row="2" Grid.Column="0"/>
+              <Label Text="{Binding ReturnTicketSegment.DepartureAirport}" Grid.Row="2" Grid.Column="1"/>
+              <Label Text="{Binding ReturnTicketSegment.LocalArrivalTime, StringFormat='{0:hh:mm}'}" Grid.Row="2" Grid.Column="2"/>
+              <Label Text="{Binding ReturnTicketSegment.ArrivalAirport}" Grid.Row="2" Grid.Column="3"/>
+            </Grid>
           </ViewCell.View>
         </ViewCell>
       </DataTemplate>
     </ResourceDictionary>
   </ContentPage.Resources>
-  <StackLayout>
+  <StackLayout Orientation="Vertical">
+    <Label FontSize="16" Text="{Binding Price}"/>
     <ListView ItemTemplate="{StaticResource ProposalsListTemplate}" ItemsSource="{Binding Proposals}"/>
   </StackLayout>
 </ContentPage>

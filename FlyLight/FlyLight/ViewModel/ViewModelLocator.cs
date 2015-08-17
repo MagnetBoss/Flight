@@ -1,4 +1,5 @@
-﻿using FlyLight.BL.ProposalsList.Implementation.DesignMode;
+﻿using FlyLight.BL.ProposalsList.Implementation;
+using FlyLight.BL.ProposalsList.Implementation.DesignMode;
 using FlyLight.BL.ProposalsList.Interfaces;
 using FlyLight.Model.TicketsSearch.Implementation.Stub;
 using FlyLight.Model.TicketsSearch.Interfaces;
@@ -24,7 +25,7 @@ namespace FlyLight.ViewModel
             {
                 //SimpleIoc.Default.Register<ITicketsSearchService, TicketSearchServiceDesign>();
                 SimpleIoc.Default.Register<IPlacesAutoCompleteService, FakePlacesAutoCompleteService>();
-                SimpleIoc.Default.Register<IProposalsListService, FakeProposalsListService>();
+                SimpleIoc.Default.Register<IProposalsListService, ProposalsListService>();
             }
 
             SimpleIoc.Default.Register<MainPageViewModel>();
