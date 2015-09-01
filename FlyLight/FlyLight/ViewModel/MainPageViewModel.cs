@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using FlyLight.BL.ProposalsList.DTO;
 using FlyLight.Model.TicketsSearch.Interfaces;
 using FlyLight.ViewModel.Messaging;
 using GalaSoft.MvvmLight.Command;
@@ -75,7 +76,18 @@ namespace FlyLight.ViewModel
             {
                 return new RelayCommand(() =>
                 {
-                    Messenger.Default.Send(new ShowProposalsListMessage());
+                    Messenger.Default.Send(new ShowProposalsListMessage
+                    {
+                        Filter = new ProposalsListFilterWrapper
+                        {
+                            Children = ChildrenCount,
+                            Adults = AdultsCount,
+                            Infants = BabbiesCount,
+                            DepatureCityIata = DepatureCityViewModel.City,
+                            DepatureDate = DepatureDate,
+                            ArrivalCityIata = ArrivalCityViewModel.City
+                        }
+                    });
                 });
             }
         }

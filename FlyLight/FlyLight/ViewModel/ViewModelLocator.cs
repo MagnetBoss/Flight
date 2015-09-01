@@ -16,7 +16,7 @@ namespace FlyLight.ViewModel
 
             SimpleIoc.Default.Register<IPlacesAutoCompleteService, FakePlacesAutoCompleteService>();
             SimpleIoc.Default.Register<IProposalsListService, TravelPayoutsProposalsListService>();
-            SimpleIoc.Default.Register<ITravelPayoutsReadFacade, FakeTravelPayoutsReadFacade>();
+            SimpleIoc.Default.Register<ITravelPayoutsReadFacade, TravelPayoutsTravelPayoutsReadFacade>();
 
             SimpleIoc.Default.Register<MainPageViewModel>();
             SimpleIoc.Default.Register<ProposalsListViewModel>();

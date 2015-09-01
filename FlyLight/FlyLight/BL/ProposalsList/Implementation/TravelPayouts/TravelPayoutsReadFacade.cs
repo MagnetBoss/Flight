@@ -39,7 +39,8 @@ namespace FlyLight.BL.ProposalsList.Implementation.TravelPayouts
                 result = new StreamReader(stream).ReadToEnd();
             }
 
-            return JObject.Parse(result);
+            dynamic v = JObject.Parse(result);
+            return v;
         }
 
         public async Task<JArray> SearchFlightResult(string searchId)
