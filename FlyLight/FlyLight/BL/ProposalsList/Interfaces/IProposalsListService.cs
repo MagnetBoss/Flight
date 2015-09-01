@@ -1,5 +1,4 @@
 ﻿using FlyLight.BL.ProposalsList.DTO;
-using FlyLight.BL.ProposalsList.Implementation;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

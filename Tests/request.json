@@ -6,17 +6,17 @@
     "marker": "78042",
     "segments": [
         {
-            "origin": "MOW",
-            "destination": "LED",
-            "date": "2014-12-18"
+            "origin": "LAX",
+            "destination": "NYC",
+            "date": "2015-11-25"
         },
         {
-            "origin": "LED",
-            "destination": "MOW",
-            "date": "2014-12-25"
+            "origin": "NYC",
+            "destination": "LAX",
+            "date": "2015-12-18"
         }
     ],
-	    "passengers": {
+	"passengers": {
         "adults": "1",
         "children": "0",
         "infants": "0"

@@ -1,0 +1,49 @@
+﻿{
+    "search_depth": 0,
+    "origin_country": "RU",
+    "search_id": "1c1d8de0-0ab3-49db-b85c-913b0e51f6d5",
+    "banner_info": { },
+    "currency_rates": { "afn": 1.1132, "zwl": 0.0, "mvr": 4.73576, "kes": 0.682734, "hnl": 3.25067, "btn": 1.05624, "nzd": 45.5996, "mkd": 1.33784, "aoa": 0.562113, "azn": 67.5707, "vef": 11.2663, "thb": 1.9836, "gel": 29.6244, "awg": 39.5528, "scr": 5.42567, "bgn": 41.5325, "sll": 0.0174814, "lvl": 116.8, "vuv": 0.658111, "pgk": 25.1872, "tmt": 20.222, "krw": 0.0588143, "myr": 16.6274, "aed": 19.2772, "mga": 0.021422, "ugx": 0.0194611, "etb": 3.40105, "dop": 1.58922, "bhd": 187.648, "bob": 10.3508, "djf": 0.399997, "cup": 2.67168, "bam": 41.9676, "tzs": 0.0332392, "yer": 0.32953, "xaf": 0.125133, "vnd": 0.00314134, "amd": 0.146473, "xdr": 99.7915, "wst": 27.3286, "ltl": 23.7725, "idr": 0.00508001, "usd": 70.7465, "mnt": 0.0356673, "clp": 0.100523, "xpf": 0.687843, "bnd": 50.1848, "lsl": 5.35187, "xcd": 26.222, "cop": 0.0218895, "gip": 111.552, "all": 0.582853, "xof": 0.125133, "gyd": 0.347142, "hkd": 9.13378, "isk": 0.556273, "php": 1.51508, "huf": 0.25782299999999997, "mxn": 4.12225, "nio": 2.57914, "gmd": 1.80842, "eur": 81.1533, "ghs": 17.1844, "mad": 7.44221, "jpy": 0.587522, "sos": 0.107876, "dkk": 10.8849, "fjd": 33.191, "pab": 70.7995, "sdg": 11.6638, "sgd": 50.1038, "gtq": 9.28214, "lak": 0.00868706, "dzd": 0.681702, "bsd": 70.7995, "qar": 19.4429, "rwf": 0.0975765, "sek": 8.54313, "kzt": 0.309613, "rub": 1, "jmd": 0.605642, "inr": 1.0623, "byr": 0.00422683, "crc": 0.134268, "mzn": 1.77888, "npr": 0.687274, "ern": 6.76205, "irr": 0.00237129, "ttd": 11.2573, "lyd": 52.0891, "zmk": 0.00832936, "bmd": 70.7995, "cdf": 0.0776311, "pyg": 0.0134856, "sbd": 9.61904, "czk": 3.00333, "bbd": 35.3998, "zar": 5.35269, "kpw": 0.570375, "fkp": 111.552, "nok": 8.67076, "lbp": 0.0469649, "bwp": 6.91128, "omr": 183.895, "uyu": 2.48594, "std": 0.00345077, "pen": 21.5721, "gbp": 111.0366, "cny": 11.0459, "mop": 8.86774, "syp": 0.374954, "bzd": 35.761, "chf": 74.9037, "cad": 53.4743, "ils": 18.4508, "shp": 111.552, "sar": 18.8716, "mwk": 0.15417, "mdl": 3.70595, "iqd": 0.0617582, "top": 33.3537, "kyd": 86.3409, "bdt": 0.910839, "ang": 40.4569, "brl": 20.1821, "pkr": 0.681289, "bif": 0.0460335, "kwd": 235.763, "egp": 9.04209, "tjs": 11.2425, "cve": 0.744475, "kmf": 0.166843, "jod": 99.9288, "twd": 2.15177, "htg": 1.37502, "mmk": 0.0553121, "ron": 18.2817, "lkr": 0.528352, "mur": 2.01421, "szl": 5.35187, "mro": 0.24288, "lrd": 0.765401, "rsd": 0.681621, "srd": 21.8517, "uah": 3.1376, "aud": 51.3124, "try": 24.0307, "khr": 0.0173062, "hrk": 10.8561, "nad": 5.35187, "tnd": 37.2257, "ars": 7.64079, "uzs": 0.027283599999999998, "ngn": 0.355955, "pln": 19.1647, "gnf": 0.00929616, "kgs": 1.12865 },
+    "affiliate": true,
+    "destination_country": "RU",
+    "show_ads": false,
+    "user_ip": "127.0.0.1",
+    "average_price": { "direct": 2542, "not_direct": 10430 },
+    "geoip_country": "Unknown",
+    "currency": "rub",
+    "travelpayouts_api_request": true,
+    "gates_count": 0,
+    "open_jaw": false,
+    "marker": "78042",
+    "locale": "ru",
+    "meta": { "uuid": "1c1d8de0-0ab3-49db-b85c-913b0e51f6d5" },
+    "_ga": null,
+    "host": "MyApp",
+    "affiliate_has_sales": false,
+    "auid": null,
+    "know_english": "false",
+    "segments": [
+        { "original_destination": "LED", "origin_country": "RU", "date": "2015-08-27", "original_origin": "MOW", "destination_country": "RU", "destination": "LED", "origin": "MOW" }
+		],
+	    "geoip_city"
+        :
+        "Unknown",
+        "trip_class"
+        :
+        "Y",
+        "internal"
+        :
+        false,
+        "city_distance"
+        :
+        634,
+        "range"
+        :
+        "false",
+        "signature"
+        :
+        "c3450b97c1f80dc9936b88a7682130c8",
+        "passengers"
+        :
+        { "children": 0, "adults": 1, "infants": 0 }
+}

@@ -3,8 +3,10 @@ using System.Text;
 using Newtonsoft.Json.Linq;
 using xBrainLab.Security.Cryptography;
 
-namespace FlyLight.BL.ProposalsList.Implementation
+namespace FlyLight.BL.ProposalsList.Implementation.TravelPayouts
 {
+    //Cоздаем signature ключ по алгоритму, указанному на сайте travelpayouts
+    //см. https://support.travelpayouts.com/hc/ru/articles/203956173?_ga=1.45153312.583613381.1440156926
     public class RequestSignatureGenerator
     {
         private static void Recursive(StringBuilder request, JToken json)
@@ -34,16 +36,15 @@ namespace FlyLight.BL.ProposalsList.Implementation
             }
         }
 
-        private const string ApiToken = "08fe1910088a2a5638939991eaf4a59e";
-
-        public static string GenerateSignature(JObject requestBody)
+        public static string GenerateSignature(JObject requestBody, string apiToken)
         {
             var request = new StringBuilder();
             Recursive(request, requestBody);
+            var requestStr = request.ToString();
 
-            var md5Input = ApiToken + request;
+            var md5Input = apiToken + ":" + requestStr.Substring(0, requestStr.Length - 1);
 
-            return MD5.GetHashString(md5Input);
+            return MD5.GetHashString(md5Input).ToLower();
         }
     }
 }

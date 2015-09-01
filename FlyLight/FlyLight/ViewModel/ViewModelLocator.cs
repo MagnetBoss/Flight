@@ -1,9 +1,8 @@
-﻿using FlyLight.BL.ProposalsList.Implementation;
-using FlyLight.BL.ProposalsList.Implementation.DesignMode;
+﻿using FlyLight.BL.ProposalsList.Implementation.TravelPayouts;
+using FlyLight.BL.ProposalsList.Implementation.TravelPayouts.Fake;
 using FlyLight.BL.ProposalsList.Interfaces;
 using FlyLight.Model.TicketsSearch.Implementation.Stub;
 using FlyLight.Model.TicketsSearch.Interfaces;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 
@@ -15,18 +14,9 @@ namespace FlyLight.ViewModel
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            if (ViewModelBase.IsInDesignModeStatic)
-            {
-                //SimpleIoc.Default.Register<ITicketsSearchService, TicketSearchServiceDesign>();
-                SimpleIoc.Default.Register<IPlacesAutoCompleteService, FakePlacesAutoCompleteService>();
-                SimpleIoc.Default.Register<IProposalsListService, FakeProposalsListService>();
-            }
-            else
-            {
-                //SimpleIoc.Default.Register<ITicketsSearchService, TicketSearchServiceDesign>();
-                SimpleIoc.Default.Register<IPlacesAutoCompleteService, FakePlacesAutoCompleteService>();
-                SimpleIoc.Default.Register<IProposalsListService, ProposalsListService>();
-            }
+            SimpleIoc.Default.Register<IPlacesAutoCompleteService, FakePlacesAutoCompleteService>();
+            SimpleIoc.Default.Register<IProposalsListService, TravelPayoutsProposalsListService>();
+            SimpleIoc.Default.Register<ITravelPayoutsReadFacade, FakeTravelPayoutsReadFacade>();
 
             SimpleIoc.Default.Register<MainPageViewModel>();
             SimpleIoc.Default.Register<ProposalsListViewModel>();
