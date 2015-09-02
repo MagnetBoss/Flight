@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Threading.Tasks;
 using FlyLight.BL.ProposalsList.DTO;
 using FlyLight.BL.ProposalsList.Interfaces;
@@ -18,12 +19,12 @@ namespace FlyLight.BL.ProposalsList.Implementation.TravelPayouts
 
         public async Task<IList<ProposalOverviewDto>> GetProposalsListAsync(ProposalsListFilterWrapper filter)
         {
-            dynamic json = await _travelPayoutsReadFacade.SearchFlights(filter);
-            string searchId = json.search_id;
+            var json = await _travelPayoutsReadFacade.SearchFlights(filter);
+            string searchId = json["search_id"].Value<string>();
 
             bool lastAgentReached = false;
 
-            var proposalsJson = new List<dynamic>();
+            var proposalsJson = new List<JObject>();
 
             while (!lastAgentReached)
             {
@@ -42,11 +43,7 @@ namespace FlyLight.BL.ProposalsList.Implementation.TravelPayouts
                 lastAgentReached = lastProposal.Properties().Count() == 1 &&
                                    lastProposal.Properties().First().Name == "search_id";
 
-                foreach (var proposalJson in agentResponseJson)
-                {
-                    proposalsJson.Add(proposalJson);
-                }
-
+                proposalsJson.AddRange(agentResponseJson.OfType<JObject>());
             }
             if (lastAgentReached)
                 proposalsJson.RemoveAt(proposalsJson.Count - 1); //удаляем последний фиктивный "proposal"
@@ -60,6 +57,7 @@ namespace FlyLight.BL.ProposalsList.Implementation.TravelPayouts
 
             return proposalsResult;
         }
+
     }
     
 }

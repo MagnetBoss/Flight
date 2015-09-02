@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Windows.Input;
+using Cirrious.MvvmCross.ViewModels;
 using FlyLight.BL.ProposalsList.DTO;
 using FlyLight.Model.TicketsSearch.Interfaces;
 using FlyLight.ViewModel.Messaging;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using ReactiveUI;
 
 namespace FlyLight.ViewModel
 {
-    public class MainPageViewModel : ReactiveObject
+    public class MainPageViewModel : MvxViewModel
     {
         public MainPageViewModel(IPlacesAutoCompleteService placesAutoCompleteService)
         {
@@ -29,7 +29,8 @@ namespace FlyLight.ViewModel
             get { return _depatureDate; }
             set
             {
-                this.RaiseAndSetIfChanged(ref _depatureDate, value);
+                if (value == _depatureDate) return;
+                RaisePropertyChanged(() => DepatureDate);
             }
         }
         
@@ -39,7 +40,8 @@ namespace FlyLight.ViewModel
             get { return _returnDate; }
             set
             {
-                this.RaiseAndSetIfChanged(ref _returnDate, value);
+                if (value == _returnDate) return;
+                RaisePropertyChanged(() => ReturnDate);
             }
         }
 
@@ -47,28 +49,44 @@ namespace FlyLight.ViewModel
         public bool ReturnTicketEnabled
         {
             get { return _returnTicketEnabled; }
-            set { this.RaiseAndSetIfChanged(ref _returnTicketEnabled, value); }
+            set
+            {
+                if (value == _returnTicketEnabled) return;
+                RaisePropertyChanged(() => ReturnTicketEnabled);
+            }
         }
 
         private int _adultsCount;
         public int AdultsCount
         {
             get { return _adultsCount; }
-            set { this.RaiseAndSetIfChanged(ref _adultsCount, value); }
+            set
+            {
+                if (value == _adultsCount) return;
+                RaisePropertyChanged(() => AdultsCount);
+            }
         }
 
         private int _childrenCount;
         public int ChildrenCount //дети 2-12 лет
         {
             get { return _childrenCount; }
-            set { this.RaiseAndSetIfChanged(ref _childrenCount, value); }
+            set
+            {
+                if (value == _childrenCount) return;
+                RaisePropertyChanged(() => ChildrenCount);
+            }
         }
 
         private int _babbiesCount;
         public int BabbiesCount //дети 0-2 года
         {
             get { return _babbiesCount; }
-            set { this.RaiseAndSetIfChanged(ref _babbiesCount, value); }
+            set
+            {
+                if (value == _babbiesCount) return;
+                RaisePropertyChanged(() => BabbiesCount);
+            }
         }
         public ICommand SearchTicketsCommand
         {

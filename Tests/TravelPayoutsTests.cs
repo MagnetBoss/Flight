@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using FlyLight.BL.ProposalsList.DTO;
 using FlyLight.BL.ProposalsList.Implementation.TravelPayouts;
@@ -9,15 +10,29 @@ using Newtonsoft.Json.Linq;
 namespace Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class TravelPayoutsTests
     {
         [TestMethod]
         public void Map_From_Json_Generate_Right_Dto()
         {
             var file = File.ReadAllText("response.json");
-            var dto = TravelPayoutsMapper.MapFromAgentJson(JArray.Parse(file)[0]);
-            
+            var dto = TravelPayoutsMapper.MapFromAgentJson(JArray.Parse(file)[0] as JObject);
             Assert.IsNotNull(dto);
+            Assert.IsNotNull(dto.FirstOrDefault());
+            Assert.IsNotNull(dto.First().Currency);
+            Assert.IsNotNull(dto.First().ForwardTicketSegment);
+            Assert.IsNotNull(dto.First().ForwardTicketSegment.ArrivalAirport);
+            Assert.IsNotNull(dto.First().ForwardTicketSegment.DepartureAirport);
+            Assert.IsNotNull(dto.First().ForwardTicketSegment.LocalArrivalTime);
+            Assert.IsNotNull(dto.First().ForwardTicketSegment.LocalDepatureTime);
+            Assert.IsNotNull(dto.First().Price);
+            Assert.IsNotNull(dto.First().ReturnTicketSegment);
+            Assert.IsNotNull(dto.First().ReturnTicketSegment.ArrivalAirport);
+            Assert.IsNotNull(dto.First().ReturnTicketSegment.DepartureAirport);
+            Assert.IsNotNull(dto.First().ReturnTicketSegment.LocalArrivalTime);
+            Assert.IsNotNull(dto.First().ReturnTicketSegment.LocalDepatureTime);
+            Assert.IsNotNull(dto.First().TicketSignId);
+            Assert.IsNotNull(dto.First().ValidatingCarrierIconUrl);
         }
 
         [TestMethod]
@@ -41,9 +56,7 @@ namespace Tests
         {
             public async Task<JObject> SearchFlights(ProposalsListFilterWrapper filter)
             {
-                var result = new JObject();
-                result["search_id"] = "3c406327-4107-44fb-9ee4-833f688dfd37";
-                return result;
+                return JObject.Parse(File.ReadAllText("real_response_1.json"));
             }
 
             public async Task<JArray> SearchFlightResult(string searchId)
@@ -66,6 +79,7 @@ namespace Tests
                 ArrivalCityIata = "LED"
             });
             var proposals = task.Result;
+            Assert.IsNotNull(proposals);
         }
 
         [TestMethod]

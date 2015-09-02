@@ -27,8 +27,9 @@ namespace FlyLight.ViewModel
 
         public async Task FetchProposals(ProposalsListFilterWrapper filter)
         {
+            const int maxProposalsCount = 75;
             var proposals = await ProposalsListService.GetProposalsListAsync(filter);
-            Proposals = proposals.ToList();
+            Proposals = proposals.OrderBy(p => p.Price).Take(maxProposalsCount).ToList();
         }
 
         private List<ProposalOverviewDto> _proposals;

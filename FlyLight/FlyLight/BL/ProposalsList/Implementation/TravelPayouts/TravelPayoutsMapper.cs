@@ -9,76 +9,96 @@ namespace FlyLight.BL.ProposalsList.Implementation.TravelPayouts
 {
     public class TravelPayoutsMapper
     {
-        private static SegmentOverviewDto MapSegmentFromJson(dynamic flightInfo)
+        public static SegmentOverviewDto MapSegmentFromJson(JObject flightInfo)
         {
-            long depatureTimestamp = flightInfo.local_departure_timestamp;
-            long arrivalTimestamp = flightInfo.local_arrival_timestamp;
-            var segmentDto = new SegmentOverviewDto
+            try
             {
-                DepartureAirport = flightInfo.departure,
-                LocalDepatureTime = UnixTimeToDateTime.ConvertUnixToDateTime(depatureTimestamp),
-                ArrivalAirport = flightInfo.arrival,
-                LocalArrivalTime = UnixTimeToDateTime.ConvertUnixToDateTime(arrivalTimestamp)
-            };
+                long depatureTimestamp = flightInfo["local_departure_timestamp"].Value<long>();
+                long arrivalTimestamp = flightInfo["local_arrival_timestamp"].Value<long>();
+                var segmentDto = new SegmentOverviewDto
+                {
+                    DepartureAirport = flightInfo["departure"].Value<string>(),
+                    LocalDepatureTime = UnixTimeToDateTime.ConvertUnixToDateTime(depatureTimestamp),
+                    ArrivalAirport = flightInfo["arrival"].Value<string>(),
+                    LocalArrivalTime = UnixTimeToDateTime.ConvertUnixToDateTime(arrivalTimestamp)
+                };
 
-            return segmentDto;
+                return segmentDto;
+            }
+            catch (Exception e)
+            {
+                //TODO log
+                return null;
+            }
         }
 
-        public static IList<ProposalOverviewDto> MapFromAgentJson(dynamic json)
+        public static ProposalOverviewDto MapFromProposalJson(JObject proposalJson)
         {
-            List<ProposalOverviewDto> proposalsResult = new List<ProposalOverviewDto>();
-            foreach (dynamic proposal in json.proposals)
+            try
             {
-                try
+                var proposalResult = new ProposalOverviewDto();
+
+                var term = (JObject)proposalJson["terms"];
+                var priceDescriptionWrapper = term.Properties().FirstOrDefault();
+                var priceDescription = (JObject)priceDescriptionWrapper.Value;
+
+                proposalResult.Price = priceDescription["price"].Value<decimal>();
+                proposalResult.Currency = priceDescription["currency"].Value<string>();
+                proposalResult.TicketSignId = proposalJson["sign"].Value<string>();
+                proposalResult.ValidatingCarrierIconUrl = "http://pics.avs.io/300/150/" + proposalJson["validating_carrier"].Value<string>() + ".png";
+
+                var segments = new List<SegmentOverviewDto>();
+
+                foreach (var segment in ((JArray)proposalJson["segment"]).OfType<JObject>())
                 {
-                    var proposalResult = new ProposalOverviewDto();
+                    var flightInfo = (JObject)segment["flight"][0];
 
-                    var term = (JObject)proposal.terms;
-                    dynamic priceDescription = term.Properties().FirstOrDefault() as JProperty;
-                    
-                    if (priceDescription == null || priceDescription.Value == null) continue;
+                    var segmentDto = MapSegmentFromJson(flightInfo);
 
-                    if (priceDescription.Value.price == null ||
-                        priceDescription.Value.currency == null ||
-                        proposal.sign == null ||
-                        proposal.validating_carrier == null)
+                    if (segmentDto == null)
                         continue;
-                    
-                    if (proposal.segment == null) 
-                        continue;
-                    
-                    proposalResult.Price = priceDescription.Value.price;
-                    proposalResult.Currency = priceDescription.Value.currency;
-                    proposalResult.TicketSignId = proposal.sign;
-                    proposalResult.ValidatingCarrierIconUrl = "http://pics.avs.io/300/150/" + proposal.validating_carrier + ".png";
 
-                    var segments = new List<SegmentOverviewDto>();
-
-                    foreach (dynamic segment in proposal.segment)
-                    {
-                        var flightInfo = segment.flight[0];
-
-                        var segmentDto = MapSegmentFromJson(flightInfo);
-
-                        if (segmentDto == null)
-                            continue;
-
-                        segments.Add(segmentDto);
-                    }
-
-                    var orderedSegments = segments.OrderBy(s => s.LocalDepatureTime);
-                    proposalResult.ForwardTicketSegment = orderedSegments.ElementAtOrDefault(0);
-                    proposalResult.ReturnTicketSegment = orderedSegments.ElementAtOrDefault(1);
-
-                    proposalsResult.Add(proposalResult);
+                    segments.Add(segmentDto);
                 }
-                catch (Exception e)
-                {
-                    //TODO log
-                }
+
+                var orderedSegments = segments.OrderBy(s => s.LocalDepatureTime);
+                proposalResult.ForwardTicketSegment = orderedSegments.ElementAtOrDefault(0);
+                proposalResult.ReturnTicketSegment = orderedSegments.ElementAtOrDefault(1);
+
+                return proposalResult;
             }
+            catch (Exception e)
+            {
+                //TODO log
+                return null;
+            }
+        }
 
-            return proposalsResult;
+        public static IList<ProposalOverviewDto> MapFromAgentJson(JObject json)
+        {
+            try
+            {
+                List<ProposalOverviewDto> proposalsResult = new List<ProposalOverviewDto>();
+
+                var proposalsJsonArray = json["proposals"] as JArray;
+                if (proposalsJsonArray == null)
+                    return new List<ProposalOverviewDto>();
+                foreach (var proposal in proposalsJsonArray.OfType<JObject>())
+                {
+                    var proposalDto = MapFromProposalJson(proposal);
+                    if (proposalDto == null)
+                        continue;
+
+                    proposalsResult.Add(proposalDto);
+                }
+
+                return proposalsResult;
+            }
+            catch (Exception e)
+            {
+                //TODO log
+                return new List<ProposalOverviewDto>();
+            }
         }
     }
 }

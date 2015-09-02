@@ -6,6 +6,6 @@ namespace FlyLight.BL.ProposalsList.Interfaces
 {
     public interface IProposalsListService
     {
-        Task<IList<ProposalOverviewDto>> GetProposalsListAsync(ProposalsListFilterWrapper filter); 
+        Task<IList<ProposalOverviewDto>> GetProposalsListAsync(ProposalsListFilterWrapper filter);
     }
 }
