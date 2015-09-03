@@ -3,7 +3,7 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using FlyLight.BL.ProposalsList.DTO;
-using FlyLight.Tools;
+using FlyLight.Infrastructure;
 using Newtonsoft.Json.Linq;
 
 namespace FlyLight.BL.ProposalsList.Implementation.TravelPayouts

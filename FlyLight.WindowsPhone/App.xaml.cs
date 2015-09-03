@@ -1,22 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+﻿using System.Diagnostics;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
-using Windows.UI.Xaml.Navigation;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.ViewModels;
+using Xamarin.Forms;
+using Application = Windows.UI.Xaml.Application;
+using Frame = Windows.UI.Xaml.Controls.Frame;
+using NavigationEventArgs = Windows.UI.Xaml.Navigation.NavigationEventArgs;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -48,7 +40,7 @@ namespace FlyLight.WindowsPhone
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
 #if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached)
+            if (Debugger.IsAttached)
             {
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
@@ -66,7 +58,7 @@ namespace FlyLight.WindowsPhone
                 // TODO: change this value to a cache size that is appropriate for your application
                 rootFrame.CacheSize = 1;
 
-                Xamarin.Forms.Forms.Init(e);
+                Forms.Init(e);
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
@@ -92,12 +84,15 @@ namespace FlyLight.WindowsPhone
                 rootFrame.ContentTransitions = null;
                 rootFrame.Navigated += this.RootFrame_FirstNavigated;
 
-                var setup = new Setup(rootFrame);
-                setup.Initialize();
-
-                var start = Mvx.Resolve<IMvxAppStart>();
-                start.Start();
             }
+
+
+            var setup = new Setup(rootFrame);
+            setup.Initialize();
+
+            var start = Mvx.Resolve<IMvxAppStart>();
+            start.Start();
+
 
             // Ensure the current window is active
             Window.Current.Activate();

@@ -37,7 +37,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="App.cs" />
+    <Compile Include="BL\CitiesAutoComplete\Implementation\CitiesAutoCompleteService.cs" />
+    <Compile Include="BL\CitiesAutoComplete\Implementation\ICitiesAutoCompleteReadFacade.cs" />
+    <Compile Include="BL\CitiesAutoComplete\Interface\ICitiesAutoCompleteService.cs" />
     <Compile Include="BL\ProposalsList\Implementation\Fake\FakeProposalsListService.cs" />
     <Compile Include="BL\ProposalsList\DTO\ProposalsListFilterWrapper.cs" />
     <Compile Include="BL\ProposalsList\Implementation\TravelPayouts\Fake\FakeTravelPayoutsReadFacade.cs" />
@@ -49,35 +51,17 @@
     <Compile Include="BL\ProposalsList\DTO\SegmentOverviewDto.cs" />
     <Compile Include="BL\ProposalsList\Implementation\TravelPayouts\TravelPayoutsProposalsListService.cs" />
     <Compile Include="BL\ProposalsList\Implementation\TravelPayouts\TravelPayoutsReadFacade.cs" />
-    <Compile Include="BL\TicketsSearch\DesignMode\TicketSearchServiceDesign.cs" />
-    <Compile Include="BL\TicketsSearch\DTO\ProposalDto.cs" />
-    <Compile Include="BL\TicketsSearch\DTO\SegmentDto.cs" />
-    <Compile Include="BL\TicketsSearch\DTO\SellCompanyDto.cs" />
-    <Compile Include="BL\TicketsSearch\Implementation\Real\PlacesAutoCompleteService.cs" />
-    <Compile Include="BL\TicketsSearch\Implementation\Real\TicketsSearchService.cs" />
-    <Compile Include="BL\TicketsSearch\Implementation\Stub\FakePlacesAutoCompleteService.cs" />
-    <Compile Include="BL\TicketsSearch\Interfaces\IPlacesAutoCompleteService.cs" />
-    <Compile Include="BL\TicketsSearch\Interfaces\ITicketsSearchService.cs" />
-    <Compile Include="Core\App.cs" />
+    <Compile Include="BL\CitiesAutoComplete\Implementation\CitiesAutoCompleteReadFacade.cs" />
+    <Compile Include="BL\CitiesAutoComplete\Implementation\Fake\FakePlacesAutoCompleteService.cs" />
+    <Compile Include="AL\App.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tools\AsyncCommand.cs" />
-    <Compile Include="Tools\Date\UnixTimeToDateTime.cs" />
-    <Compile Include="Tools\NotifyTaskCompletion.cs" />
-    <Compile Include="Tools\WebResponseDecompressionExstension.cs" />
+    <Compile Include="Infrastructure\Date\UnixTimeToDateTime.cs" />
+    <Compile Include="Infrastructure\NotifyTaskCompletion.cs" />
+    <Compile Include="Infrastructure\WebResponseDecompressionExstension.cs" />
     <Compile Include="ViewModel\CitySearchViewModel.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
     <Compile Include="ViewModel\Messaging\ShowProposalsListMessage.cs" />
     <Compile Include="ViewModel\ProposalsListViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="View\CustomControls\ProposalsListView.cs" />
-    <Compile Include="View\MainNavigationPage.cs" />
-    <Compile Include="View\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ProposalsListPage.xaml.cs">
-      <DependentUpon>ProposalsListPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ValueConverter\BoolToHeightConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Cirrious.CrossCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e16445fd9b451819, processorArchitecture=MSIL">
@@ -139,27 +123,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="BL\TicketsSearch\DesignMode\RoundTripJson.json" />
-    <None Include="BL\TicketsSearch\DesignMode\RoundTripJsonExample.json" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="View\MainPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="View\ProposalsListPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="BL\ProposalsList\Implementation\TravelPayouts\Fake\response1.json" />
     <EmbeddedResource Include="BL\ProposalsList\Implementation\TravelPayouts\Fake\response2.json" />
-    <Content Include="BL\TicketsSearch\Implementation\Stub\airportcodes.xml" />
+    <Content Include="BL\CitiesAutoComplete\Implementation\Fake\airportcodes.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Input;
 using Cirrious.MvvmCross.ViewModels;
+using FlyLight.BL.CitiesAutoComplete.Interface;
 using FlyLight.BL.ProposalsList.DTO;
-using FlyLight.Model.TicketsSearch.Interfaces;
 using FlyLight.ViewModel.Messaging;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -11,10 +11,10 @@ namespace FlyLight.ViewModel
 {
     public class MainPageViewModel : MvxViewModel
     {
-        public MainPageViewModel(IPlacesAutoCompleteService placesAutoCompleteService)
+        public MainPageViewModel(ICitiesAutoCompleteService citiesAutoCompleteService)
         {
-            DepatureCityViewModel = new CitySearchViewModel(placesAutoCompleteService);
-            ArrivalCityViewModel = new CitySearchViewModel(placesAutoCompleteService);
+            DepatureCityViewModel = new CitySearchViewModel(citiesAutoCompleteService);
+            ArrivalCityViewModel = new CitySearchViewModel(citiesAutoCompleteService);
             DepatureDate = DateTime.Now;
             ReturnDate = DepatureDate.AddDays(2);
             AdultsCount = 1;
@@ -30,6 +30,7 @@ namespace FlyLight.ViewModel
             set
             {
                 if (value == _depatureDate) return;
+                _depatureDate = value;
                 RaisePropertyChanged(() => DepatureDate);
             }
         }
@@ -41,6 +42,7 @@ namespace FlyLight.ViewModel
             set
             {
                 if (value == _returnDate) return;
+                _returnDate = value;
                 RaisePropertyChanged(() => ReturnDate);
             }
         }
@@ -52,6 +54,7 @@ namespace FlyLight.ViewModel
             set
             {
                 if (value == _returnTicketEnabled) return;
+                _returnTicketEnabled = value;
                 RaisePropertyChanged(() => ReturnTicketEnabled);
             }
         }
@@ -63,6 +66,7 @@ namespace FlyLight.ViewModel
             set
             {
                 if (value == _adultsCount) return;
+                _adultsCount = value;
                 RaisePropertyChanged(() => AdultsCount);
             }
         }
@@ -74,18 +78,20 @@ namespace FlyLight.ViewModel
             set
             {
                 if (value == _childrenCount) return;
+                _childrenCount = value;
                 RaisePropertyChanged(() => ChildrenCount);
             }
         }
 
-        private int _babbiesCount;
-        public int BabbiesCount //дети 0-2 года
+        private int _infantsCount;
+        public int InfantsCount //дети 0-2 года
         {
-            get { return _babbiesCount; }
+            get { return _infantsCount; }
             set
             {
-                if (value == _babbiesCount) return;
-                RaisePropertyChanged(() => BabbiesCount);
+                if (value == _infantsCount) return;
+                _infantsCount = value;
+                RaisePropertyChanged(() => InfantsCount);
             }
         }
         public ICommand SearchTicketsCommand
@@ -100,7 +106,7 @@ namespace FlyLight.ViewModel
                         {
                             Children = ChildrenCount,
                             Adults = AdultsCount,
-                            Infants = BabbiesCount,
+                            Infants = InfantsCount,
                             DepatureCityIata = DepatureCityViewModel.City,
                             DepatureDate = DepatureDate,
                             ArrivalCityIata = ArrivalCityViewModel.City

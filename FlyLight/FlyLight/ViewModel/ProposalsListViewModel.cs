@@ -1,15 +1,15 @@
 ﻿using FlyLight.BL.ProposalsList.Interfaces;
-using ReactiveUI;
 using GalaSoft.MvvmLight.Messaging;
 using FlyLight.ViewModel.Messaging;
 using System.Threading.Tasks;
 using FlyLight.BL.ProposalsList.DTO;
 using System.Collections.Generic;
 using System.Linq;
+using Cirrious.MvvmCross.ViewModels;
 
 namespace FlyLight.ViewModel
 {
-    public class ProposalsListViewModel : ReactiveObject
+    public class ProposalsListViewModel : MvxViewModel
     {
         public IProposalsListService ProposalsListService { get; private set; }
 
@@ -36,7 +36,12 @@ namespace FlyLight.ViewModel
         public List<ProposalOverviewDto> Proposals
         {
             get { return _proposals; }
-            private set { this.RaiseAndSetIfChanged(ref _proposals, value); }
+            private set
+            {
+                if (value == _proposals) return;
+                _proposals = value;
+                RaisePropertyChanged(() => Proposals);
+            }
         }
 
     }

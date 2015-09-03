@@ -5,13 +5,12 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using FlyLight.Model.TicketsSearch.Interfaces;
 
-namespace FlyLight.Model.TicketsSearch.Implementation.Stub
+namespace FlyLight.BL.CitiesAutoComplete.Implementation.Fake
 {
-    public class FakePlacesAutoCompleteService : IPlacesAutoCompleteService
+    public class FakePlacesAutoCompleteService : ICitiesAutoCompleteReadFacade
     {
-        public async Task<List<string>> GetPlaces(string term, string locale)
+        public async Task<List<string>> GetCities(string term, string locale)
         {
             await Task.Delay(TimeSpan.FromSeconds(2)).ConfigureAwait(false);
             return GetAllCities().Where(x => x.StartsWith(term, StringComparison.OrdinalIgnoreCase)).ToList();
@@ -22,7 +21,7 @@ namespace FlyLight.Model.TicketsSearch.Implementation.Stub
             try
             {
                 var assembly = typeof(FakePlacesAutoCompleteService).GetTypeInfo().Assembly;
-                Stream stream = assembly.GetManifestResourceStream("FlyLight.Model.TicketsSearch.Implementation.Stub.airportcodes.xml");
+                Stream stream = assembly.GetManifestResourceStream("FlyLight.BL.CitiesAutoComplete.Implementation.Fake.airportcodes.xml");
                 var xmlDeserializer = new XmlSerializer(typeof (iata));
                 var converted = (iata)xmlDeserializer.Deserialize(stream);
                 return converted.iata_airport_codes.Select(x => x.airport + " " + x.code).ToList();

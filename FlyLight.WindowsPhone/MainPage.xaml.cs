@@ -1,50 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
+﻿using Windows.UI.Xaml.Navigation;
+using Cirrious.MvvmCross.WindowsCommon.Views;
+using FlyLight.ViewModel;
+using FlyLight.WindowsPhone.Common;
 
 namespace FlyLight.WindowsPhone
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class MainPage
+    public sealed partial class MainPage : MvxWindowsPage
     {
         public MainPage()
         {
-            this.InitializeComponent();
-
-            LoadApplication(new FlyLight.App());
-
-            this.NavigationCacheMode = NavigationCacheMode.Required;
+            InitializeComponent();
+            _navigationHelper = new NavigationHelper(this);
         }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.
-        /// This parameter is typically used to configure the page.</param>
+        public new MainPageViewModel ViewModel
+        {
+            get { return (MainPageViewModel) base.ViewModel; }
+            set { base.ViewModel = value; }
+        }
+
+
+        private readonly NavigationHelper _navigationHelper;
+        public NavigationHelper NavigationHelper
+        {
+            get { return _navigationHelper; }
+        }
+
+        private readonly ObservableDictionary _defaultViewModel = new ObservableDictionary();
+        public ObservableDictionary DefaultViewModel
+        {
+            get { return _defaultViewModel; }
+        }
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            // TODO: Prepare page for display here.
+            base.OnNavigatedTo(e);
+            _navigationHelper.OnNavigatedTo(e);
+        }
 
-            // TODO: If your application contains multiple pages, ensure that you are
-            // handling the hardware Back button by registering for the
-            // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.
-            // If you are using the NavigationHelper provided by some templates,
-            // this event is handled for you.
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            _navigationHelper.OnNavigatedFrom(e);
         }
     }
 }

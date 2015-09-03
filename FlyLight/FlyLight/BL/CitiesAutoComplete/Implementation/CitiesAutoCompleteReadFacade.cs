@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
-using FlyLight.Model.TicketsSearch.Interfaces;
 using Newtonsoft.Json.Linq;
 
-namespace FlyLight.Model.TicketsSearch.Implementation.Real
+namespace FlyLight.BL.CitiesAutoComplete.Implementation
 {
-    public class PlacesAutoCompleteService : IPlacesAutoCompleteService
+    public class CitiesAutoCompleteReadFacade : ICitiesAutoCompleteReadFacade
     {
-        public async Task<List<string>> GetPlaces(string term, string locale)
+        public async Task<List<string>> GetCities(string term, string locale)
         {
             string url = "http://places.aviasales.ru/?term=" + term + "&locale=" + locale;
 
