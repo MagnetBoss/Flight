@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using Cirrious.MvvmCross.ViewModels;
+using FlyLight.BL.CitiesAutoComplete.Implementation;
 using FlyLight.BL.CitiesAutoComplete.Interface;
 using FlyLight.BL.ProposalsList.DTO;
 using FlyLight.ViewModel.Messaging;
@@ -18,6 +19,13 @@ namespace FlyLight.ViewModel
             DepatureDate = DateTime.Now;
             ReturnDate = DepatureDate.AddDays(2);
             AdultsCount = 1;
+        }
+
+        //Only for design mode
+        public MainPageViewModel()
+            : this(new CitiesAutoCompleteService(new CitiesAutoCompleteReadFacade()))
+        {
+            
         }
 
         public CitySearchViewModel DepatureCityViewModel { get; private set; }

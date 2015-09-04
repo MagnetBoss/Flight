@@ -1,4 +1,6 @@
-﻿using Cirrious.CrossCore;
+﻿using System;
+using System.Linq;
+using Cirrious.CrossCore;
 using Cirrious.MvvmCross.ViewModels;
 using FlyLight.BL.CitiesAutoComplete.Implementation;
 using FlyLight.BL.CitiesAutoComplete.Interface;
@@ -19,6 +21,11 @@ namespace FlyLight.AL
             Mvx.RegisterType<ITravelPayoutsReadFacade, FakeTravelPayoutsReadFacade>();
 
             Mvx.RegisterSingleton<IMvxAppStart>(new MvxAppStart<MainPageViewModel>());
+        }
+
+        public Type FindViewModelTypeByName(string typeName)
+        {
+            return CreatableTypes().FirstOrDefault(t => t.Name == typeName);
         }
     }
 }
